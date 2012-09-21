@@ -207,18 +207,34 @@ function list(req, res, next, tag){
       if(k++ < offset) {
         continue;
       }
+
+      if (excerpts.length === 0) {
+        excerpts.push(
+          '<ul class="entryList">'
+        );
+      }
+
       excerpts.push(
-        '<div class="chapter-options clearfix"><span class="label date">', post.meta.fdate, '</span></div>',
-        '<h2><a href="', post.meta.link, '">', post.meta.title, '</a></h2>',
-        '<div class="chapter-excerpt">', post.excerpt, '</div>',
-        '<div class="chapter-footer"><a href="', post.meta.link, '">', settings.strings[req.language].entire_post, ' &raquo;</a></div>'
-      );
+          '<li class="entryListItem">',
+          '  <span>',
+          '    <h3>', post.meta.title, '</h3>',
+          '    <div class="chapter-excerpt">', post.meta.description, '</div>',
+          '    <a href="', post.meta.link, '">', settings.strings[req.language].entire_post, '</a>',
+          '  </span>',
+          '</li>'
+        );
+
       if(++j >= max) {
+
+        excerpts.push(
+          '</ul>'
+        );
+
         break;
       }
     }
   }
-  
+
   excerpts = excerpts.join("");
   if(!excerpts) {
     excerpts = "<h2>" + settings.strings[req.language].empty_list + "</h2>";
