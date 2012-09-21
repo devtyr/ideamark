@@ -10,8 +10,9 @@ var path    = require('path');
 var fs      = require('fs');
 var options = require('optimist').argv;
 var winston = require('winston');
+var watcher = require('./libs/watcher');
 
-var supportedExtensions = [ ".md", ".markdown" ];
+global.supportedExtensions = [ ".md", ".markdown" ];
 
 global.settings = JSON.parse(fs.readFileSync(path.join(__dirname, 'settings.json'), 'utf-8'));
 settings.root   = __dirname.replace(/\/+$/, "");
@@ -43,27 +44,9 @@ settings.contentDirs.forEach(function(dir){
     // we want to watch files, so there is no need to use caching for posts
     settings.useCaching = false;
 
-    var files = fs.readdirSync(dir);
-    var containsMarkdown = false;
-
-    for (var i = 0; i < files.length; i++) {
-      var extname = path.extname(files[i]);
-      if (supportedExtensions.indexOf(extname) !== -1) {
-        containsMarkdown = true;
-        break;
-      }
-    }
-
-    if (containsMarkdown) {
-      fs.watch(dir, function(event, filename) {
-        var extname = path.extname(filename);
-        if (filename && supportedExtensions.indexOf(extname) !== -1 && event === 'change') {
-          console.log("[" + event + "] " + "Updating " + filename + " ...");
-          var completeFileName = path.join(dir, filename);
-          utils.updatePost(fs.ReadStream(completeFileName), completeFileName, {}, null);
-        }
-      });
-    }
+    watcher.addDirectoryWatch(dir, function(completeFileName) {
+      utils.updatePost(fs.ReadStream(completeFileName), completeFileName, {}, null);
+    });
   }
 
   utils.crawl(path.join(settings.root, dir), function(filepath) {
