@@ -33,7 +33,7 @@ You need to get these to be the same on your server and local installation. Ever
 
 You can start your server by running 
 
-    node blog.js -s 
+    node server.js -s 
 
 on your server.
 
@@ -43,7 +43,7 @@ To upload posts, images and templates start adding them in one of the `contentDi
 
 After you're done publish your changes by running 
 
-    node blog.js -p 
+    node server.js -p 
     
 on your local machine.
     
