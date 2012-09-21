@@ -1,13 +1,17 @@
-/* This Blog
- * A simple nodejs blog engine for programmers that like Markdown
+/* ideamark
+ * A simple nodejs concept/documentation store supporting markdown
  * 
- * Author: Dusko Jordanovski <jordanovskid@gmail.com>
+ * Based on this-blog by Dusko Jordanovski <jordanovskid@gmail.com>
+ * 
+ * Author: Norbert Eder <wpfnerd+nodejs@gmail.com>
  */
 
 var path    = require('path');
 var fs      = require('fs');
 var options = require('optimist').argv;
 var winston = require('winston');
+
+var supportedExtensions = [ ".md", ".markdown" ];
 
 global.settings = JSON.parse(fs.readFileSync(path.join(__dirname, 'settings.json'), 'utf-8'));
 settings.root   = __dirname.replace(/\/+$/, "");
@@ -43,7 +47,8 @@ settings.contentDirs.forEach(function(dir){
     var containsMarkdown = false;
 
     for (var i = 0; i < files.length; i++) {
-      if (files[i].substr(-2).toLowerCase() === 'md') {
+      var extname = path.extname(files[i]);
+      if (supportedExtensions.indexOf(extname) !== -1) {
         containsMarkdown = true;
         break;
       }
@@ -51,7 +56,8 @@ settings.contentDirs.forEach(function(dir){
 
     if (containsMarkdown) {
       fs.watch(dir, function(event, filename) {
-        if (filename && filename.substr(-2).toLowerCase() === 'md' && event === 'change') {
+        var extname = path.extname(filename);
+        if (filename && supportedExtensions.indexOf(extname) !== -1 && event === 'change') {
           console.log("[" + event + "] " + "Updating " + filename + " ...");
           var completeFileName = path.join(dir, filename);
           utils.updatePost(fs.ReadStream(completeFileName), completeFileName, {}, null);
@@ -60,9 +66,10 @@ settings.contentDirs.forEach(function(dir){
     }
   }
 
-  utils.crawl(path.join(settings.root, dir), function(filepath){
+  utils.crawl(path.join(settings.root, dir), function(filepath) {
     counter++;
-    utils[filepath.substr(-2).toLowerCase() === 'md' ? 'updatePost' : 'updateFile'](fs.ReadStream(filepath), filepath, {}, function(){
+    var extname = path.extname(filepath);
+    utils[supportedExtensions.indexOf(extname) !== -1 ? 'updatePost' : 'updateFile'](fs.ReadStream(filepath), filepath, {}, function(){
       if(--counter){
         return;
       }

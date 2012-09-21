@@ -11,7 +11,7 @@
   "tagsUrl":     "/tags",
   "adminUrl":    "/admin",
   "errorLog":    "error.log",
-  "maxExcerpts": 2,
+  "maxExcerpts": 10,
   "pagination":  9,
   "watchFiles":  true,
   "useCaching":  true,

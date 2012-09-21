@@ -104,6 +104,8 @@ Here's an example post file:
     This is the continuation of the post. This will be visible only on the
     post page.
 
+Supported file extensions are `.md` and `.markdown`.
+
 ## License
 
 ideamark is lincensed under the MIT license.
@@ -112,6 +114,5 @@ ideamark is lincensed under the MIT license.
 ## TODOS
 
 - Add an option to exclude a post from being listed on the homepage.
-- Support `.markdown` file extension
 - Templating for list of posts
-
+- File watch does not work correctly if there is no initial markdown file available
