@@ -66,8 +66,8 @@ Here's an overview of the configuration options in the `settings.json` file:
     maxExcerpts: Maximum number of posts shown on a tag/home page
     pagination:  Maximum number of pagination links
     languages:   List of languages - ["en", "mk"]
-    langinfo:    Hash of language names - {"en": "English", "mk": "Македонски"}
-    sitemenus:   List of menus that posts can appear in - ["bookmarks", "2011"]
+    langinfo:    Hash of language names - {"en": "English", "de": "Deutsch"}
+    sitemenus:   List of menus that posts can appear in - ["bookmarks", "2012"]
     strings:     A hash of stranslation strings for each language
 
 Appart from the `settings.json` file, you can also configure your posts individually by using headers. A post filename should look like this:
@@ -111,8 +111,10 @@ Supported file extensions are `.md` and `.markdown`.
 ideamark is lincensed under the MIT license.
 
 
-## TODOS
+## Upcoming Features
 
-- Add an option to exclude a post from being listed on the homepage.
-- Templating for list of posts
-- File watch does not work correctly if there is no initial markdown file available
+- Option to exclude entries from being published
+- Improved way to organize ideas/concepts/documentations
+- Better templating support
+- Edit Markdown files online
+- Support Dropbox and other Cloud stores
