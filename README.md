@@ -1,23 +1,22 @@
-# This Blog
+# ideamark
 
-"This Blog" is a blogging engine made for people that like markdown and the command line. It's a single-user, no database application written in node.js.
+**ideamark** is an online container for your ideas, concepts and documentations based on [this-blog](https://github.com/skid/this-blog "this-blog") a simple blogging engine by [Dusko Jordanovski](https://github.com/skid "Dusko Jordanovski") written in node.js. All documents are written with Markdown markup.
 
 ## Features
 
 - Simple publishing mechanism - use a single command
-- No database or static file servers - all data is kept in files
+- No database - all data is kept in files
 - Blog posts are single files and contain their own configuration
 - Can handle multiple languages
 - Can tag posts and dynamically build tag categories
 - Posts can have their own templates or use the provided master
+- File watcher to live-update pages
 
 ## Installation
 
-**Note:** Since This Blog depends on connect >= 2.0.0 and that version still isn't published to NPM, the npm install will fail. Please checkout this git repository, cd into it and use npm to manually install the dependencies. You can checkout connect 2.0.0alpha elswhere and then link it into the `node_modules` directory.
-
 To use it, you will have to make 2 installations, one on your server and one on your local machine:
 
-    npm install this-blog
+    npm install ideamark
 
 ## Usage
 
@@ -40,7 +39,7 @@ on your server.
 
 #### Publishing
 
-To upload posts, images and templates start adding them in one of the `contentDirs` that you defined. Normally your posts would go in the _posts_ directory, templates in the _templates_ directory, but This Blog uses only the file extension to make difference between posts and other files. Any file with the `.md` extension will be treated like a post.
+To upload posts, images and templates start adding them in one of the `contentDirs` that you defined. Normally your posts would go in the _posts_ directory, templates in the _templates_ directory, but **ideamark* uses only the file extension to make difference between posts and other files. Any file with the `.md` extension will be treated like a post.
 
 After you're done publish your changes by running 
 
@@ -62,6 +61,8 @@ Here's an overview of the configuration options in the `settings.json` file:
     tagsUrl:     Url path for tags (with leading slash)
     adminUrl:    Url path for publishing (passworded, with leading slash)
     errorLog:    Error log filename 
+    watchFiles:  Activates the file watcher to live-update your instance
+    useCaching:  Activates caching for files (will be deactivated if `watchFiles` is set to `true`)
     maxExcerpts: Maximum number of posts shown on a tag/home page
     pagination:  Maximum number of pagination links
     languages:   List of languages - ["en", "mk"]
@@ -76,7 +77,7 @@ Appart from the `settings.json` file, you can also configure your posts individu
 It has to have the `md` extension for it to be treated like a post. The ".en" part tells This Blog the language of the post. If it's ommitted, the first language in your `languages` settings will be used. To have the same post on another language, just do this:
   
     This is my first post.en.md  # English Version
-    This is my first post.mk.md  # Macedonian Version
+    This is my first post.de.md  # German Version
 
 Posts are further configured by using headers. All posts must start with a set of HTTP-like headers. Headers must be the first thing in the post file and **are over when the first instance of 2 consecutive newlines is found**
 
@@ -105,9 +106,12 @@ Here's an example post file:
 
 ## License
 
-This blog is lincensed under the MIT license.
+ideamark is lincensed under the MIT license.
 
 
 ## TODOS
 
 - Add an option to exclude a post from being listed on the homepage.
+- Support `.markdown` file extension
+- Templating for list of posts
+

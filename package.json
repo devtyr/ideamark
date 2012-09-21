@@ -1,17 +1,17 @@
 {
-  "name": "this-blog",
-  "description": "A simple nodejs blog engine for programmers that like Markdown",
-  "author": "Dusko Jordanovski <jordanovskid@gmail.com>",
-  "version": "0.2.0",
+  "name": "ideamark",
+  "description": "A simple nodejs document store for ideas, concepts, documentation supporting markdown",
+  "author": "Norbert Eder <wpfnerd+nodejs@gmail.com>",
+  "version": "0.1.0",
   "license": "MIT",
   "keywords": [
     "blog",
     "markdown",
-    "static"
+    "live-update"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/skid/this-blog.git"
+    "url": "git://github.com/devtyr/ideamark.git"
   },
   "dependencies": {
     "mime": ">=1.2.4",
