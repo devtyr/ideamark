@@ -60,7 +60,7 @@ settings.contentDirs.forEach(function(dir){
         client.publish();
       }
       else if(options.s || options.serve) {
-        require('http').createServer(server).listen(settings.port);
+        require('http').createServer(server).listen(process.env.PORT || settings.port);
         console.log("Serving this blog on " + settings.server + ":" + settings.port);
       }
       else {
