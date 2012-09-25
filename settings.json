@@ -6,7 +6,7 @@
   "remoteUrl":   "127.0.0.1",
   "password":    "AEUOBA$@*Yfaf4oiuh2Aa$DhQI$Dha48d40dA$Id881048dn1F$18hg4f1",
   "contentDirs": ["posts", "templates", "static"],
-  "gaCode":      "GA-ABCDEFG",
+  "gaCode":      "",
   "postsUrl":    "/posts",
   "tagsUrl":     "/tags",
   "adminUrl":    "/admin",

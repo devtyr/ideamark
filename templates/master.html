@@ -10,6 +10,7 @@
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
     <link href="/static/style.css" rel="stylesheet">    
+    <link href="/static/style_print.css" rel="stylesheet" media="print">
     <!-- Le fav and touch icons -->
     <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-touch-icon-72x72.png">
@@ -36,16 +37,9 @@
         </div>
       </div>
       <footer>
-        <p>&copy; {{strings.author}} 2012</p>
+        <p><a href="https://github.com/devtyr/ideamark" title="ideamark">ideamark</a> based on <a href="https://github.com/skid/this-blog" title="this-blog">this-blog</a>; powered by <a href="http://www.nodejs.org" title="node.js">node.js</a>; documents written by {{strings.author}}</p>
       </footer>
     </div> <!-- /container -->
-    <script>
-      var _gaq = [['_setAccount', '{{settings.gaCode}}'], ['_trackPageview']];
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+    {{gaCode}}
   </body>
 </html>

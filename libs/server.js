@@ -140,6 +140,19 @@ main.use('/', function(req, res, next){
   next();
 });
 
+/*
+ * Adds Google Analytics code if defined
+ */
+ main.use('/', function(req, res, next) {
+  // Set Google Analytics code if appropriated
+    if (settings.gaCode !== "") {
+      fs.readFile(path.join(settings.root, "templates/qaCode.html"), function(err, data){        
+        req.context.gaCode = data;
+      });
+    }
+    next();
+ });
+
 /* 
  * Handles post views.
  */
@@ -216,11 +229,12 @@ function list(req, res, next, tag){
 
       excerpts.push(
           '<li class="entryListItem">',
+          '<a href="', post.meta.link, '">',
           '  <span>',
-          '    <h3>', post.meta.title, '</h3>',
+          '    <h3>[', settings.strings[req.language][post.meta.status], '] ', post.meta.title, '</h3>',
           '    <div class="chapter-excerpt">', post.meta.description, '</div>',
-          '    <a href="', post.meta.link, '">', settings.strings[req.language].entire_post, '</a>',
           '  </span>',
+          '</a>',
           '</li>'
         );
 

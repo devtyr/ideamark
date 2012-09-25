@@ -56,7 +56,7 @@ Here's an overview of the configuration options in the `settings.json` file:
     remoteUrl:   The public URL of your blog
     password:    Authentication password - needs to be the same
     contentDirs: Dirs scanned for content changes before publishing
-    gaCode:      Google analytics key
+    gaCode:      Google Analytics key, empty string to not use Google Analytics
     postsUrl:    Url path for posts (with leading slash)
     tagsUrl:     Url path for tags (with leading slash)
     adminUrl:    Url path for publishing (passworded, with leading slash)
@@ -89,6 +89,7 @@ Here's an example post file:
     Description:  Nothing special       # META description
     Menus:        Bookmarks             # One of the menus in which it appears
     Tags:         Blog, Node.js         # Post tags
+    Status:       inprogress            # use inprogress or finished as a valid status for your documents
 
     Notice the 2 new lines. This is the beginning of the post. We ommit the
     title because it will be automatically added for us from the headers.

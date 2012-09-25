@@ -33,6 +33,10 @@ var client  = require('./libs/client');
 
 console.log("Updating local files cache ...");
 
+if (settings.watchFiles) {
+  console.log("File watcher is on.");
+}
+
 // Settings file checksum
 utils.updateFile(fs.ReadStream(path.join(settings.root, 'settings.json')), path.join(settings.root, 'settings.json'));
 
