@@ -16,7 +16,7 @@ global.supportedExtensions = [ ".md", ".markdown" ];
 
 global.settings = JSON.parse(fs.readFileSync(path.join(__dirname, 'settings.json'), 'utf-8'));
 settings.root   = __dirname.replace(/\/+$/, "");
-global.cache    = { posts: {}, tags: {}, menus: {}, order: [], checksums: {} };
+global.cache    = { posts: {}, tags: {}, menus: {}, statuses: {}, order: [], checksums: {} };
 global.logger   = new (winston.Logger)({
   exitOnError: false,
   transports:  [
@@ -69,8 +69,8 @@ settings.contentDirs.forEach(function(dir){
       }
       else {
         console.log("\nUsage:\n");
-        console.log("blog.js --serve (-s) to start the server.");
-        console.log("blog.js --publish (-p) to publish your latest changes.");
+        console.log("server.js --serve (-s) to start the server.");
+        console.log("server.js --publish (-p) to publish your latest changes.");
         console.log("Edit settings.json to change settings.\n");
       }
     });

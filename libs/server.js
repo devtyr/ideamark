@@ -134,6 +134,12 @@ main.use('/', function(req, res, next){
                   return "<li><a href='/" + req.language +  settings.tagsUrl + "/" + tag + "'>" + (tag.charAt(0).toUpperCase() + tag.slice(1)) + "</a></li>";
                 }).join("") + 
               "</ul>",
+    statuses: "<h3>" + settings.strings[req.language].status + "</h3>" + 
+              "<ul class='unstyled'>" + 
+              Object.keys(cache.statuses).map(function(status) {
+                return "<li><a href='/" + req.language + settings.statusUrl + "/" + status + "'>" + settings.strings[req.language][status] + "</a></li>";
+              }).join("") + 
+              "</ul>",
     strings:  settings.strings[req.language],
     settings: settings
   };
@@ -205,9 +211,9 @@ main.use(settings.postsUrl, function(req, res, next){
 /* 
  * Handles list views (homepage and tag)
  */
-function list(req, res, next, tag){
+function list(req, res, next, tag, status){
   var i=0, j=0, k=0, post, slug, excerpts = [], max = settings.maxExcerpts;
-  var tags = cache.tags[tag] || null;
+  var tags = cache.tags[tag] || cache.statuses[status] || null;
   
   // Pagination parameters
   var filpos = cache.order.filter(function(slug){ return slug in cache.posts && req.language in cache.posts[slug]; });
@@ -216,7 +222,7 @@ function list(req, res, next, tag){
   var offset = Math.max(0, Math.min(page * max, total));
 
   while((slug = cache.order[i++]) && (post = cache.posts[slug])) {
-    if((post = post[req.language]) && (!tag || ~tags.indexOf(slug))) {
+    if((post = post[req.language]) && ((!tag && !status) || ~tags.indexOf(slug))) {
       if(k++ < offset) {
         continue;
       }
@@ -287,6 +293,15 @@ main.use(settings.tagsUrl, function(req, res, next){
   var tag = req.url.substr(1);
   if(tag in cache.tags) {
     list(req, res, next, tag);
+  }
+  next();
+});
+
+/* Render status lists */
+main.use(settings.statusUrl, function(req, res, next) {
+  var status = req.url.substr(1);
+  if(status in cache.statuses) {
+    list(req, res, next, null, status);
   }
   next();
 });

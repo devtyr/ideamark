@@ -2,12 +2,18 @@
   "name": "ideamark",
   "description": "A simple nodejs document store for ideas, concepts, documentation supporting markdown",
   "author": "Norbert Eder <wpfnerd+nodejs@gmail.com>",
-  "version": "0.1.0",
+  "homepage": "https://github.com/devtyr/ideamark",
+  "bugs": "https://github.com/devtyr/ideamark/issues",
+  "version": "0.3.0",
   "license": "MIT",
   "keywords": [
     "blog",
     "markdown",
-    "live-update"
+    "live-update",
+    "documents",
+    "ideas",
+    "documentation",
+    "specification"
   ],
   "repository": {
     "type": "git",
@@ -22,7 +28,7 @@
     "winston": ">=0.5.9"
   },
   "scripts": {
-    "start": "node blog.js -s"
+    "start": "node server.js -s"
   },
   "engines": {
     "node": ">= 0.6.0"
