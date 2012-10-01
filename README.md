@@ -89,7 +89,7 @@ Here's an example post file:
     Description:  Nothing special       # META description
     Menus:        Bookmarks             # One of the menus in which it appears
     Tags:         Blog, Node.js         # Post tags
-    Status:       inprogress            # use inprogress or finished as a valid status for your documents
+    Status:       inprogress            # use inprogress, finished or approved as a valid status for your documents
 
     Notice the 2 new lines. This is the beginning of the post. We ommit the
     title because it will be automatically added for us from the headers.
@@ -110,6 +110,13 @@ Supported file extensions are `.md` and `.markdown`.
 ## License
 
 ideamark is lincensed under the MIT license.
+
+
+## Continuous Integration status
+
+This project is tested with [Travis CI](http://travis-ci.org/).
+
+[![Build Status](https://secure.travis-ci.org/devtyr/ideamark.png)](http://travis-ci.org/devtyr/ideamark)
 
 
 ## Upcoming Features
