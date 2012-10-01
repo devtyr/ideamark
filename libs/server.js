@@ -177,6 +177,7 @@ main.use(settings.postsUrl, function(req, res, next){
   req.context.author      = post.meta.author || settings.strings[req.language].author;
   req.context.description = post.meta.description;
   req.context.languages   = [
+    "<h3>" + settings.strings[req.language].languages + "</h3>" +
     "<ul class='unstyled'>",
       Object.keys(cache.posts[slug]).map(function(lang){
         return lang !== req.language ? "<li><a href='/" + lang + settings.postsUrl + "/" + slug + "' class='lang " + lang + "'>" + settings.langinfo[lang] + "</a></li>" : "";
@@ -281,7 +282,8 @@ function list(req, res, next, tag, status){
   req.context.title       = settings.strings[req.language].homepage;
   req.context.author      = settings.strings[req.language].author;
   req.context.description = settings.strings[req.language].description;
-  req.context.languages   = "<ul class='unstyled'>" +
+  req.context.languages   = "<h3>" + settings.strings[req.language].languages + "</h3>" +
+                            "<ul class='unstyled'>" +
                               settings.languages.map(function(lang){ 
                                 return "<li><a href='/" + lang + "' class='lang " + lang + "'>" + settings.langinfo[lang] + "</a></li>"; 
                               }).join("") +
