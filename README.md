@@ -126,3 +126,4 @@ This project is tested with [Travis CI](http://travis-ci.org/).
 - Better templating support
 - Edit Markdown files online
 - Support Dropbox and other Cloud stores
+- Versioning of documents
