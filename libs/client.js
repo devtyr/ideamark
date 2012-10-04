@@ -1,3 +1,11 @@
+/* ideamark
+ * A simple nodejs concept/documentation store supporting markdown
+ * 
+ * Based on this-blog by Dusko Jordanovski <jordanovskid@gmail.com>
+ * 
+ * Author: Norbert Eder <wpfnerd+nodejs@gmail.com>
+ */
+
 var cache     = global.cache;
 var crypto    = require('crypto');
 var mime      = require('mime');

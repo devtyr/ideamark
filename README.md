@@ -11,6 +11,7 @@
 - Can tag posts and dynamically build tag categories
 - Posts can have their own templates or use the provided master
 - File watcher to live-update pages
+- Document status
 
 ## Installation
 
@@ -59,6 +60,7 @@ Here's an overview of the configuration options in the `settings.json` file:
     gaCode:      Google Analytics key, empty string to not use Google Analytics
     postsUrl:    Url path for posts (with leading slash)
     tagsUrl:     Url path for tags (with leading slash)
+    statusUrl:   Url path for statuses
     adminUrl:    Url path for publishing (passworded, with leading slash)
     errorLog:    Error log filename 
     watchFiles:  Activates the file watcher to live-update your instance
@@ -125,5 +127,5 @@ This project is tested with [Travis CI](http://travis-ci.org/).
 - Improved way to organize ideas/concepts/documentations
 - Better templating support
 - Edit Markdown files online
-- Support Dropbox and other Cloud stores
+- Support Dropbox and other cloud stores
 - Versioning of documents

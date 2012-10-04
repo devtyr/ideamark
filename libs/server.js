@@ -1,7 +1,11 @@
-/**
- * ThisBlog by "Dusko Jordanovski" <jordanovskid@gmail.com>
- * A simple blog for programmers that like Markdown and git.
+/* ideamark
+ * A simple nodejs concept/documentation store supporting markdown
+ * 
+ * Based on this-blog by Dusko Jordanovski <jordanovskid@gmail.com>
+ * 
+ * Author: Norbert Eder <wpfnerd+nodejs@gmail.com>
  */
+ 
 var utils     = require('./utils');
 var winston   = require('winston');
 var path      = require('path');
