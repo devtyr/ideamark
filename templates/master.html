@@ -15,9 +15,22 @@
     <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-touch-icon-114x114.png">
+
+    <script type="text/javascript">
+      function resizeImages(maxWidth) {
+        var img = document.images;
+
+        for(var i = 0; i < img.length; i++) {
+          if (img[i].width > maxWidth) {
+            var ratio = maxWidth / img[i].width;
+            img[i].width = maxWidth;
+          }
+        }
+      }
+    </script>
   </head>
 
-  <body>
+  <body onload="resizeImages(700);">
     <div class="container">
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="page-header">
