@@ -262,7 +262,7 @@ exports.updatePost = function(stream, filepath, options, callback) {
     }
           
     // Removes posts from tags/statuses if they were previously there
-    // but in the last update their menus/tags headers were changed.
+    // but in the last update their tags headers were changed.
     Object.keys(cache.tags).forEach(function(tag){
       var index = cache.tags[tag].indexOf(slug);
       if((!post.meta.tags || post.meta.tags.indexOf(tag) === -1) && index > -1) {

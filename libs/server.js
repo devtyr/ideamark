@@ -124,10 +124,11 @@ main.use('/', function(req, res, next){
  * Builds the sidebar and creates context 
  */
 main.use('/', function(req, res, next){
+  var tagsSorted = Object.keys(cache.tags).sort();
   req.context = {
     tags:     "<h3>" + settings.strings[req.language].tags + "</h3>" +
               "<ul class='unstyled'>" +
-                Object.keys(cache.tags).map(function(tag){
+                tagsSorted.map(function(tag){
                   return "<li><a href='/" + req.language +  settings.tagsUrl + "/" + tag + "'>" + (tag.charAt(0).toUpperCase() + tag.slice(1)) + "</a></li>";
                 }).join("") + 
               "</ul>",
@@ -235,7 +236,8 @@ function list(req, res, next, tag, status){
           '<li class="entryListItem">',
           '<a href="', post.meta.link, '">',
           '  <span>',
-          '    <h3>[', settings.strings[req.language][post.meta.status], '] ', post.meta.title, '</h3>',
+          '    <h3>', post.meta.title, '</h3>',
+          '      <img src=\'static/status_', post.meta.status, '.png\' style=\'width: 24px; margin-left: 5px; text-align: center; float: right; \' title=\'', settings.strings[req.language][post.meta.status], '\'', '/>', 
           '    <div class="chapter-excerpt">', post.meta.description, '</div>',
           '  </span>',
           '</a>',
