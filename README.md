@@ -69,7 +69,6 @@ Here's an overview of the configuration options in the `settings.json` file:
     pagination:  Maximum number of pagination links
     languages:   List of languages - ["en", "mk"]
     langinfo:    Hash of language names - {"en": "English", "de": "Deutsch"}
-    sitemenus:   List of menus that posts can appear in - ["bookmarks", "2012"]
     strings:     A hash of stranslation strings for each language
 
 Appart from the `settings.json` file, you can also configure your posts individually by using headers. A post filename should look like this:
@@ -89,7 +88,6 @@ Here's an example post file:
     Title:        My First Post         # This appears as the title (<h1>)
     Date:         2011-12-19            # Must be a date in the ISO format
     Description:  Nothing special       # META description
-    Menus:        Bookmarks             # One of the menus in which it appears
     Tags:         Blog, Node.js         # Post tags
     Status:       inprogress            # use inprogress, finished or approved as a valid status for your documents
 

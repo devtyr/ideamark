@@ -18,7 +18,6 @@
   "useCaching":  true,
   "languages":   ["en", "de"],
   "langinfo":    {"en": "English", "de": "Deutsch"},
-  "sitemenus":   ["inprogress", "finished", "approved"],
   "strings":     {
     "en": {
       "homepage":       "Homepage",

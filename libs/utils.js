@@ -94,7 +94,7 @@ exports.deleteFile = function(filepath, callback){
   delete cache.checksums[filepath.substr(settings.root.length + 1)];
   delete templates[filepath.substr(settings.root.length + 1)];
   
-  // Remove posts from cache, menus and tags
+  // Remove posts from cache and tags
   if(filepath.substr(-2).toLowerCase() === 'md'){
     var filename  = filepath.substr(filepath.lastIndexOf(path.sep) + 1);
     var chunks    = filename.split(".");
@@ -119,15 +119,6 @@ exports.deleteFile = function(filepath, callback){
         }
         if(cache.tags[i].length === 0){
           delete cache.tags[i];
-        }
-      }
-
-      for(i in cache.menus){
-        if(~cache.menus[i].indexOf(slug)){
-          cache.menus[i].splice(cache.menus[i].indexOf(slug), 1);
-        }
-        if(cache.menus[i].length === 0){
-          delete cache.menus[i];
         }
       }
 
@@ -249,7 +240,7 @@ exports.updatePost = function(stream, filepath, options, callback) {
           headers.fdate = formatDate(v, lang);
         } catch(e) {}; 
       }
-      if(k === 'tags' || k === 'menus') {
+      if(k === 'tags') {
         v = v.split(",").map(function(tag){ return tag.trim().toLowerCase(); });
       }
       headers[k] = v;
@@ -270,7 +261,7 @@ exports.updatePost = function(stream, filepath, options, callback) {
       cache.posts[slug] = temp;
     }
           
-    // Removes posts from menus/tags/statuses if they were previously there
+    // Removes posts from tags/statuses if they were previously there
     // but in the last update their menus/tags headers were changed.
     Object.keys(cache.tags).forEach(function(tag){
       var index = cache.tags[tag].indexOf(slug);
@@ -279,15 +270,6 @@ exports.updatePost = function(stream, filepath, options, callback) {
       }
       if(cache.tags[tag].length === 0){
         delete cache.tags[tag];
-      }
-    });
-    Object.keys(cache.menus).forEach(function(menu){
-      var index = cache.menus[menu].indexOf(slug);
-      if((!post.meta.menus || post.meta.menus.indexOf(menu) === -1) && index > -1) {
-        cache.menus[menu].splice(index, 1);
-      }
-      if(cache.menus[menu].length === 0){
-        delete cache.menus[menu];
       }
     });
     Object.keys(cache.statuses).forEach(function(status){
@@ -300,7 +282,7 @@ exports.updatePost = function(stream, filepath, options, callback) {
       }
     });
     
-    // Adds posts to menus/tags
+    // Adds posts to tags
     if('tags' in post.meta) {
       post.meta.tags.forEach(function(tag){
         tag = tag.toLowerCase();
@@ -311,20 +293,6 @@ exports.updatePost = function(stream, filepath, options, callback) {
         }
         else {
           cache.tags[tag] = [slug];
-        }
-      });
-    }
-
-    if('menus' in post.meta) {
-      post.meta.menus.forEach(function(menu){
-        menu = menu.toLowerCase();
-        if(menu in cache.menus) {
-          if(cache.menus[menu].indexOf(slug) === -1) {
-            cache.menus[menu].push(slug);
-          }
-        }
-        else {
-          cache.menus[menu] = [slug];
         }
       });
     }

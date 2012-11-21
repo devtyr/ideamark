@@ -125,13 +125,6 @@ main.use('/', function(req, res, next){
  */
 main.use('/', function(req, res, next){
   req.context = {
-    menus:    settings.sitemenus.map(function(menu){
-                var list = (cache.menus[menu] || []).map(function(slug){
-                  var post = cache.posts[slug] && cache.posts[slug][req.language];
-                  return post ? "<li><a href='/" + req.language + settings.postsUrl + "/" + slug + "'>" + post.meta.title + "</a></li>" : "";
-                }).join("");
-                return list ? [ "<h3>", settings.strings[req.language][menu] || "", "</h3>", "<ul class='unstyled'>", list, "</ul>" ].join("") : "";
-              }).join(""),
     tags:     "<h3>" + settings.strings[req.language].tags + "</h3>" +
               "<ul class='unstyled'>" +
                 Object.keys(cache.tags).map(function(tag){
