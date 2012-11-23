@@ -170,7 +170,7 @@ main.use(settings.postsUrl, function(req, res, next){
   if(!(req.method === 'GET' && slug && (post = cache.posts[slug]) && (post = post[req.language]))){
     return next(404);
   }
-  req.context.content     = "<span class='label date'>" + post.meta.fdate + "</span><h1>" + post.meta.title + "</h1>" + post.content;
+  req.context.content     = "<span class='label date'>" + post.meta.fdate + "</span><h1>" + post.meta.title + "<img src='/static/status_" + post.meta.status + ".png' style='width: 24px; margin-left: 5px;' title='" + settings.strings[req.language][post.meta.status] + "'/>" + "</h1>" + post.content;
   req.context.title       = post.meta.title;
   req.context.author      = post.meta.author || settings.strings[req.language].author;
   req.context.description = post.meta.description;
