@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ideamark : A simple node.js online container for your ideas, concepts and documentations using markdown" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ideamark</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/devtyr/ideamark">View on GitHub</a>
+
+          <h1 id="project_title">Ideamark</h1>
+          <h2 id="project_tagline">A simple node.js online container for your ideas, concepts and documentations using markdown</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/devtyr/ideamark/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/devtyr/ideamark/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>ideamark</h1>
+
+<p><strong>ideamark</strong> is an online container for your ideas, concepts and documentations based on <a href="https://github.com/skid/this-blog" title="this-blog">this-blog</a> a simple blogging engine by <a href="https://github.com/skid" title="Dusko Jordanovski">Dusko Jordanovski</a> written in node.js. All documents are written with Markdown markup.</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Simple publishing mechanism - use a single command</li>
+<li>No database - all data is kept in files</li>
+<li>Blog posts are single files and contain their own configuration</li>
+<li>Can handle multiple languages</li>
+<li>Can tag posts and dynamically build tag categories</li>
+<li>Posts can have their own templates or use the provided master</li>
+<li>File watcher to live-update pages</li>
+<li>Document status</li>
+</ul><h2>Installation</h2>
+
+<p>To use it, you will have to make 2 installations, one on your server and one on your local machine:</p>
+
+<pre><code>npm install ideamark
+</code></pre>
+
+<h2>Usage</h2>
+
+<h4>Setting up</h4>
+
+<p>Before you start it, you need to edit the <code>settings.json</code> file in the root directory. Your local and remote installation <strong>must</strong> have the same settings for these options:</p>
+
+<pre><code>remoteUrl:    "example.com"
+remotePort:   80
+password:     "icanhazcheezburger"
+contentDirs:  ["posts", "templates", "static"]
+</code></pre>
+
+<p>You need to get these to be the same on your server and local installation. Everything else is configurable later. The <code>remoteUrl</code> and <code>remotePort</code> are the public URL and port of your blog. The <code>password</code> is used to authenticate you when you publish posts.</p>
+
+<p>You can start your server by running </p>
+
+<pre><code>node server.js -s 
+</code></pre>
+
+<p>on your server.</p>
+
+<h4>Publishing</h4>
+
+<p>To upload posts, images and templates start adding them in one of the <code>contentDirs</code> that you defined. Normally your posts would go in the <em>posts</em> directory, templates in the <em>templates</em> directory, but **ideamark* uses only the file extension to make difference between posts and other files. Any file with the <code>.md</code> extension will be treated like a post.</p>
+
+<p>After you're done publish your changes by running </p>
+
+<pre><code>node server.js -p 
+</code></pre>
+
+<p>on your local machine.</p>
+
+<h3>Configuration</h3>
+
+<p>Here's an overview of the configuration options in the <code>settings.json</code> file:</p>
+
+<pre><code>port:        The port for the node server to listen to (if you use a proxy)
+remotePort:  The public port for your blog (should be 80)
+remoteUrl:   The public URL of your blog
+password:    Authentication password - needs to be the same
+contentDirs: Dirs scanned for content changes before publishing
+gaCode:      Google Analytics key, empty string to not use Google Analytics
+postsUrl:    Url path for posts (with leading slash)
+tagsUrl:     Url path for tags (with leading slash)
+statusUrl:   Url path for statuses
+adminUrl:    Url path for publishing (passworded, with leading slash)
+errorLog:    Error log filename 
+watchFiles:  Activates the file watcher to live-update your instance
+useCaching:  Activates caching for files (will be deactivated if `watchFiles` is set to `true`)
+maxExcerpts: Maximum number of posts shown on a tag/home page
+pagination:  Maximum number of pagination links
+languages:   List of languages - ["en", "mk"]
+langinfo:    Hash of language names - {"en": "English", "de": "Deutsch"}
+strings:     A hash of stranslation strings for each language
+</code></pre>
+
+<p>Appart from the <code>settings.json</code> file, you can also configure your posts individually by using headers. A post filename should look like this:</p>
+
+<pre><code>This is my first post.en.md
+</code></pre>
+
+<p>It has to have the <code>md</code> extension for it to be treated like a post. The ".en" part tells This Blog the language of the post. If it's ommitted, the first language in your <code>languages</code> settings will be used. To have the same post on another language, just do this:</p>
+
+<pre><code>This is my first post.en.md  # English Version
+This is my first post.de.md  # German Version
+</code></pre>
+
+<p>Posts are further configured by using headers. All posts must start with a set of HTTP-like headers. Headers must be the first thing in the post file and <strong>are over when the first instance of 2 consecutive newlines is found</strong></p>
+
+<p>Here's an example post file:</p>
+
+<pre><code>Language:     en                    # This is found in the filename 
+Title:        My First Post         # This appears as the title (&lt;h1&gt;)
+Date:         2011-12-19            # Must be a date in the ISO format
+Description:  Nothing special       # META description
+Tags:         Blog, Node.js         # Post tags
+Status:       inprogress            # use inprogress, finished or approved as a valid status for your documents
+
+Notice the 2 new lines. This is the beginning of the post. We ommit the
+title because it will be automatically added for us from the headers.
+
+This part is the post excerpt. Notice the 5 dashes in-between double 
+linebreaks (\n\n-----\n\n). That's the excerpt delimiter. Everything before
+those dashes will appear in the list on the homepage/tag pages. If you
+ommit those dashes, the whole post will appear on the homepage along with
+other posts.
+
+-----
+
+This is the continuation of the post. This will be visible only on the
+post page.
+</code></pre>
+
+<p>Supported file extensions are <code>.md</code> and <code>.markdown</code>.</p>
+
+<h2>License</h2>
+
+<p>ideamark is lincensed under the MIT license.</p>
+
+<h2>Continuous Integration status</h2>
+
+<p>This project is tested with <a href="http://travis-ci.org/">Travis CI</a>.</p>
+
+<p><a href="http://travis-ci.org/devtyr/ideamark"><img src="https://secure.travis-ci.org/devtyr/ideamark.png" alt="Build Status"></a></p>
+
+<h2>Upcoming Features</h2>
+
+<ul>
+<li>Option to exclude entries from being published</li>
+<li>Improved way to organize ideas/concepts/documentations</li>
+<li>Better templating support</li>
+<li>Edit Markdown files online</li>
+<li>Support Dropbox and other cloud stores</li>
+<li>Versioning of documents</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ideamark maintained by <a href="https://github.com/devtyr">devtyr</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
